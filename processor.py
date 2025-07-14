@@ -1,4 +1,6 @@
 import pandas as pd
+from srl_loader import load_monthly_curtailment_factors
+
 
 class ConsumptionProcessor:
     def __init__(self, bezug_df, rueck_df, eigenv_df):
@@ -22,6 +24,9 @@ class ConsumptionProcessor:
             direction='nearest'
         ).drop(columns=['eigen_time']).set_index('timestamp')
 
+        self.monthly_factors = load_monthly_curtailment_factors()
+
+
     def compute_all(self):
         df = self.df
 
@@ -31,11 +36,11 @@ class ConsumptionProcessor:
         # PV_Bezug = Rueck + Eigenverbrauch
         df['PV_Bezug'] = df['Rueck'] + df['Eigenverbrauch']
 
-        # Bezug_abgeregelt = Gesamt - 20% of PV-BEZUG
+        df['month'] = df.index.month.astype(str).str.zfill(2)
 
-        # change to variable depending on negative value of SRL. (1(-x))
+        df['curtailment_factor'] = df ['month'].map(self.monthly_factors).fillna(0.2)
 
-        df['Bezug_abgeregelt'] = df['Gesamtverbrauch'] - 0.2 * df['PV_Bezug']
+        df['Bezug_abgeregelt'] = df['Gesamtverbrauch'] - df['curtailment_factor'] * df['PV_Bezug']
 
         return df
 
@@ -52,7 +57,20 @@ class ConsumptionProcessor:
         records = []
         for month, row in monthly.iterrows():
             month_str = month.strftime('%Y-%m')
-            records.append({ "month": month_str, "type": "Bezug", "peak": round(row['Bezug'], 2) })
-            records.append({ "month": month_str, "type": "Bezug_abgeregelt", "peak": round(row['Bezug_abgeregelt'], 2) })
+            raw = round(row['Bezug'], 2)
+            abg = round(row['Bezug_abgeregelt'], 2)
+            delta = round(abg - raw, 2)
+
+            records.append({
+                "month": month_str,
+                "type": "Bezug",
+                "peak": raw,
+                })
+            records.append({
+                "month": month_str,
+                "type": "Bezug_abgeregelt",
+                "peak": abg,
+                "Delta zu Bezug": delta
+                })
 
         return records

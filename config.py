@@ -47,3 +47,16 @@ STRUCTURE_TYPE_2 = {
         '15min Wert kW': {'dtype': 'float64'},
     }
 }
+
+
+#SRL Control Energy Data (1 file for all months)
+SRL_CONFIG = {
+    'file': DATA_DIR / '2024_SRL.xlsx',
+    'sheet': 'Zeitreihen0h15',
+    'sheet_options': {
+        'header': 2,
+        'usecols': 'A,G,H',
+        'names': ['timestamp', 'SRL_pos_kWh', 'SRL_neg_kWh'],
+    }
+}
+
