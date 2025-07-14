@@ -3,6 +3,8 @@ from processor import ConsumptionProcessor
 import config
 import os
 import json
+from plotter import plot_all
+
 
 def main():
     print("Loading data...")
@@ -50,5 +52,9 @@ def main():
 
     print(f"JSON export complete: {output_path}")
 
+    print("Creating plots...")
+    plot_all()
+    print(f"Plots created at in data folder!")
+    
 if __name__ == "__main__":
     main()
