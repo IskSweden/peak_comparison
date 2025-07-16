@@ -43,7 +43,7 @@ def main():
     print(f"\nMax factor: {max_factor:.3f}  |  Min: {min_factor:.3f}  |  Avg: {avg_factor:.3f}")
     
 
-    # Exporting to CSV
+    # Exporting to JSON
     os.makedirs(config.OUTPUT_DIR, exist_ok=True)
     output_path = config.OUTPUT_DIR / "monthly_peaks_long.json"
 
