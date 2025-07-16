@@ -5,7 +5,7 @@ date: "2025-07-16"
 ---
 
 
-# Peak Vergleich Bezug vs Bezuig abgeregelt
+# Peak Vergleich Bezug vs Bezug abgeregelt
 Dieses Dokument dient den Zweck die Installation, Modifikation und weiterentwickelung des Python Scripts einfacher zu machen
 
 ## Inhaltsverzeichnis
@@ -53,9 +53,7 @@ Also, auf der gleichen Ebene einen Ordner namens *data* erstellen und dann folge
 
 ---
 
-# Dokumentation Erlifeld Peaks
-
-Diese Dokumentation soll dazu dienen das Programm ```Peak_comparison``` zu verstehen. Es sollte einem Nutzer, Entwickler oder Reviewer die benötigten Informationen geben, sodass man den Code versteht.
+# Dokumentation Peak Vergleich sollte einem Nutzer, Entwickler oder Reviewer die benötigten Informationen geben, sodass man den Code versteht.
 
 ---
 
@@ -408,7 +406,7 @@ SRL-based Curtailment Factors
  • Month 01: 0.624
  • Month 02: 0.832
  • Month 03: 0.564
- • Month 04: 1.049
+ • Month 04: 1.000
  • Month 05: 0.835
  • Month 06: 0.833
  • Month 07: 0.744
@@ -418,8 +416,8 @@ SRL-based Curtailment Factors
  • Month 11: 0.709
  • Month 12: 0.635
 
-Max factor: 1.049  |  Min: 0.546  |  Avg: 0.749
-JSON export complete: /home/isak/Code/Python/peak_comparison/output/monthly_peaks_long.json
+Max factor: 1.000  |  Min: 0.546  |  Avg: 0.749
+JSON export complete: /home/<USER>/Python/peak_comparison/output/monthly_peaks_long.json
 Creating plots...
 Plots created at in data folder!
 ```
