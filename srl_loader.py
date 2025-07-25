@@ -23,4 +23,8 @@ def load_monthly_curtailment_factors() -> dict:
         max_norm = group['SRL_normiert'].max()
         monthly_factors[f"{month:02d}"] = round(max_norm, 4)
 
+        clamped_value = min(max_norm, 1.0)
+
+        monthly_factors[f"{month:02d}"] = round(clamped_value, 4)
+
     return monthly_factors
