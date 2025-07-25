@@ -40,7 +40,7 @@ class ConsumptionProcessor:
 
         df['curtailment_factor'] = df ['month'].map(self.monthly_factors).fillna(0.2)
 
-        df['Bezug_abgeregelt'] = df['Gesamtverbrauch'] - df['curtailment_factor'] * df['PV_Bezug']
+        df['Bezug_abgeregelt'] = df['Gesamtverbrauch'] + 1 * df['Eigenverbrauch']
 
         return df
 
